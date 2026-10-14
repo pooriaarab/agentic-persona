@@ -1,14 +1,22 @@
 {
   "name": "agentic-persona",
   "version": "0.1.0",
-  "description": "Keep one consistent AI persona across social content.",
+  "description": "Define AI persona profiles, check brand voice and disclosure text, and build image, video, and caption prompts with a Node.js SDK, CLI, and MCP.",
   "keywords": [
-    "persona",
-    "influencer",
+    "ai-persona",
     "brand-voice",
-    "agentic-suite",
+    "content-checking",
+    "ai-disclosure",
+    "prompt-templates",
+    "image-prompts",
+    "video-prompts",
+    "caption-prompts",
+    "nodejs",
+    "typescript",
     "cli",
-    "mcp"
+    "mcp",
+    "model-context-protocol",
+    "zod"
   ],
   "license": "MIT",
   "author": "Pooria Arab",
