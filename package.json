@@ -1,6 +1,6 @@
 {
   "name": "agentic-persona",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Define AI persona profiles, check brand voice and disclosure text, and build image, video, and caption prompts with a Node.js SDK, CLI, and MCP.",
   "keywords": [
     "ai-persona",
