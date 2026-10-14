@@ -1,0 +1,15 @@
+# agentic-persona
+
+Keep one consistent AI persona across social content.
+
+Keywords: persona,influencer,brand-voice,agentic-suite,cli,mcp.
+
+- SDK: import { summarizeText, dispatchText } from "agentic-persona".
+- CLI: agentic-persona summary --text "...".
+- MCP: run agentic-persona mcp, then call summarize_text.
+
+## Docs
+
+- README: https://github.com/pooriaarab/agentic-persona
+- Core contract: https://github.com/pooriaarab/agentic-persona/blob/main/docs/agentic-core.md
+- License: MIT

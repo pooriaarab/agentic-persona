@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "agentic-persona": {
+      "command": "npx",
+      "args": ["-y", "agentic-persona", "mcp"]
+    }
+  }
+}
