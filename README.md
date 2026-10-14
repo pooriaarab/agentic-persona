@@ -1,108 +1,48 @@
-# Agentic persona
+# Agentic Persona
 
-Keep one consistent AI persona across social content.
+Create and maintain one consistent, transparent AI persona across social content.
 
-Clone this repo to start a new pack. It gives one core with three
-faces: a terminal command, an npm import, and an MCP server.
-
-## What you get
-
-- One core: brand config, logs, guards, routing, dry run, cost reports.
-- Three faces over that core: CLI, library, MCP server.
-- A frozen core contract, so packs share one API.
-- A worker entry and a wrangler sample for edge deploys.
-- Build, typecheck, and tests that pass from a fresh clone.
-
-## Quick start
+## Install and verify
 
 ```sh
-git clone https://github.com/pooriaarab/agentic-persona.git my-pack
-cd my-pack
 npm install
-npm run build
-npm run typecheck
-npm test
+npm run build && npm run typecheck && npm test
 ```
 
-Run the command:
-
-```sh
-node dist/cli.js summary --text "hello world hello"
-```
-
-Call the library:
+## Library
 
 ```js
-import { summarizeText } from "./dist/index.js";
+import { definePersona, consistencyCheck, promptPack } from "agentic-persona";
 
-console.log(summarizeText("hello world hello"));
+const persona = definePersona({
+  name: "Ari", handle: "@ari", niche: "sustainable fashion",
+  voiceRules: ["warm", "practical"], bannedPhrases: ["guaranteed"],
+  disclosureLine: "Created with AI assistance.",
+  visualStyle: "sunlit editorial portrait", voiceStyle: "calm and conversational"
+});
+console.log(consistencyCheck(persona, "A warm tip. Created with AI assistance."));
+console.log(promptPack(persona, "repairing denim"));
 ```
 
-Start the MCP server:
+`promptPack` always includes the persona identity/style and an exact disclosure instruction for captions. `addNote` and `listNotes` hold process-local memory notes.
+
+## CLI
+
+Store the profile JSON above in `persona.json`, then:
+
+```sh
+node dist/cli.js create --profile persona.json
+node dist/cli.js check --profile persona.json --text "A warm tip. Created with AI assistance."
+node dist/cli.js prompts --profile persona.json --topic "repairing denim"
+node dist/cli.js add-note --note "Prefer natural light"
+node dist/cli.js list-notes
+node dist/cli.js --help
+```
+
+## MCP
 
 ```sh
 node dist/cli.js mcp
 ```
 
-## Three usecases
-
-1. You run one text summary from the terminal.
-2. You import the summary function in a script.
-3. You let an agent call the same function as an MCP tool.
-
-## Clone checklist
-
-This repo is a template. Replace each slot in each file that holds it.
-
-- `agentic-persona`: the directory name, like `my-pack`.
-- `agentic-persona`: the npm name, like `agentic-<block>` (bare name, never @pooriaarab/ scoped unless the brief says scoped).
-- `agentic-persona`: the terminal command, like `my-pack`.
-- `Keep one consistent AI persona across social content.`: one plain sentence, under 100 chars.
-- `persona,influencer,brand-voice,agentic-suite,cli,mcp`: plain keywords, like `notes, search, cli`.
-- `pooriaarab`: the repo owner, like `pooriaarab`.
-
-Slot files: `AGENTS.md`, `SKILL.md`, `RULES.md`, `llms.txt`,
-`server.json`, `.mcp.json`, `wrangler.jsonc`.
-
-Then rename the scaffold identity itself:
-
-- `package.json`: name, bin commands, mcpName. Remove `"private": true`.
-- `src/index.ts`: the `DEFAULT_BRAND` fields.
-- This file: the pitch and the examples above.
-
-At publish time, set `server.json` version to the npm version and
-`server.json` repository id from `gh api repos/OWNER/REPO --jq .id`.
-
-## Gates
-
-Run all three before you push a pack:
-
-```sh
-npm run build && npm run typecheck && npm test
-```
-
-Then run the real installed CLI once from a tarball:
-
-```sh
-npm pack
-npx --yes --package ./pooriaarab-agentic-persona-0.1.0.tgz agentic-pack summary --text "hello"
-```
-
-## Release flow
-
-Push to `main` for review. Merge to `release` to publish. The
-publish workflow ships only when the version is new.
-
-## Layout
-
-- `src/index.ts`: the library face.
-- `src/cli.ts`: the terminal face.
-- `src/mcp.ts`: the MCP server. `src/mcp-bin.ts` starts it.
-- `src/worker.ts`: the edge worker face.
-- `src/core.ts`: the shared core.
-- `agentic-core.d.ts`: the frozen contract.
-- `docs/agentic-core.md`: the contract in plain words.
-
-## License
-
-MIT. See `LICENSE`.
+Available tools: `define_persona`, `validate_persona`, `consistency_check`, `prompt_pack`, `add_persona_note`, and `list_persona_notes`.
